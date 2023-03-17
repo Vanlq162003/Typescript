@@ -1,22 +1,22 @@
-var Arr = [3, 6, 5];
-var numArray3 = [13, 5, 8, 2, 3, 1];
-function ham() {
-}
-function selectionSort(arr) {
-    for (var i = 0; i < arr.length - 1; i++) {
-        var minIndex = i;
+var numArr = [13, 5, 8, 2, 3, 1];
+var stringArr = ["b", 'a', 'c', 'd'];
+function selectionSort(arr, callback) {
+    for (var i = 0; i < arr.length; i++) {
         for (var j = i + 1; j < arr.length; j++) {
-            if (arr[j] < arr[minIndex]) {
-                minIndex = j;
+            if (callback(arr[i], arr[j]) > 0) {
+                var temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
             }
-        }
-        if (minIndex != i) {
-            var temp = arr[i];
-            arr[i] = arr[minIndex];
-            arr[minIndex] = temp;
         }
     }
     return arr;
 }
-var intArr = [5, 2, 8, 1, 4];
-console.log(selectionSort(intArr));
+var newResult = selectionSort(stringArr, function (a, b) {
+    return b.localeCompare(a);
+});
+var newResult2 = selectionSort(numArr, function (a, b) {
+    return b - a;
+});
+console.log(newResult);
+console.log(newResult2);
